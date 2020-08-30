@@ -35,7 +35,12 @@ const Base = ({ addBase, pizza }) => {
   const bases = ["classic", "Thick Crust", "Thin & Crispy"];
 
   return (
-    <motion.div className="base container" variants={conatinerVariants}>
+    <motion.div
+      className="base container"
+      variants={conatinerVariants}
+      initial="invisible"
+      animate="visible"
+    >
       <h3> step 1: Choose your Base</h3>
       <ul>
         {bases.map((base) => {
@@ -57,7 +62,14 @@ const Base = ({ addBase, pizza }) => {
         })}
       </ul>
       {pizza.base && (
-        <motion.div className="next" variants={nextVariants}>
+        <motion.div
+          className="next"
+          variants={nextVariants}
+          // child element doesn't need to have these same props too. it has it already from its parent above.
+
+          // initial="invisible"
+          // animate="visible"
+        >
           <Link to="/toppings">
             {" "}
             <motion.button
