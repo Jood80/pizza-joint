@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 //parent variant
 const conatinerVariants = {
   invisible: {
@@ -31,24 +31,40 @@ const childVaraints = {
   },
 };
 
-const Order = ({ pizza }) => (
-  <motion.div
-    className=" container order"
-    variants={conatinerVariants}
-    initial="invisible"
-    animate="visible"
-  >
-    <h2> Thanks for your Order ^_^ </h2>
-    <motion.p variants={childVaraints}>
-      you ordered a<b> {pizza.base}</b>pizza with:
-    </motion.p>
-    <motion.div variants={childVaraints}>
-      {pizza.toppings.map((topping) => (
-        <div key={topping}>
-          <b> {topping}</b>
-        </div>
-      ))}
+const Order = ({ pizza }) => {
+  const [showTitle, setShowTitle] = useState(true);
+
+  setTimeout(() => {
+    setShowTitle(false);
+  }, 3000);
+
+  return (
+    <motion.div
+      className=" container order"
+      variants={conatinerVariants}
+      initial="invisible"
+      animate="visible"
+    >
+      <AnimatePresence>
+        {showTitle && (
+          <motion.h2 exit={{ opacity: 0 }}>
+            Thanks for your Order ^)^{" "}
+          </motion.h2>
+        )}
+      </AnimatePresence>
+
+      <motion.p variants={childVaraints}>
+        you ordered a<b> {pizza.base}</b>pizza with:
+      </motion.p>
+      <motion.div variants={childVaraints}>
+        {pizza.toppings.map((topping) => (
+          <div key={topping}>
+            <b> {topping}</b>
+          </div>
+        ))}
+      </motion.div>
     </motion.div>
-  </motion.div>
-);
+  );
+};
+
 export default Order;
