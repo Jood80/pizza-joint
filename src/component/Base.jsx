@@ -15,6 +15,10 @@ const conatinerVariants = {
       stiffness: 120,
     },
   },
+  exit: {
+    x: "-100vw",
+    transition: { ease: " easeInOut" },
+  },
 };
 
 const nextVariants = {
@@ -53,6 +57,7 @@ const Base = ({ addBase, pizza }) => {
       variants={conatinerVariants}
       initial="invisible"
       animate="visible"
+      exit="exit"
     >
       <h3> step 1: Choose your Base</h3>
       <ul>
